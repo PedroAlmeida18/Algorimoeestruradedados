@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 public class BST implements EstruturaDeDados{
 
     private Node root;
@@ -36,10 +34,9 @@ public class BST implements EstruturaDeDados{
     @Override
     public void delete(int chave) {
         remover(chave);
-    
     }
 
-    private boolean remover (int key){
+    private boolean remover(int key) {
         Node atual = this.root;
         Node paiatual = null;
         while(atual != null ){
@@ -131,8 +128,29 @@ public class BST implements EstruturaDeDados{
          else {
             return false ;
          }
-        
+    }
 
+    private void deleteNode(Node n, int key){
+        if (key >= n.getValue()){
+            Node r = n.getRight();
+            if (r.getValue() == key){
+                //verificar se r é folha
+                if (r.getRight() == null && r.getLeft() == null){
+                    //Caso 1
+                    n.setRight(null);
+                } else if (r.getRight() == null){
+                    //Caso 2
+                    n.setRight(r.getLeft());
+                } else if (r.getLeft() == null){
+                    //Caso 2
+                    n.setRight(r.getRight());
+                } else{
+                    // Caso 3
+                }
+                
+            }
+
+        }
     }
 
     @Override
@@ -228,9 +246,7 @@ public class BST implements EstruturaDeDados{
             searchSucessor(no.getRight(), key, sucessor);
         }
     }
-    
 
-    
     @Override
     public int prodessor(int chave) {
         int [] prodessor = new int [1];
@@ -254,13 +270,7 @@ public class BST implements EstruturaDeDados{
             searchProdessor(no.getLeft(), key, prodessor);
         }
     }
-    
-    
-    
-    
 
-
-   
     public static void main(String[] args) {
         BST tree = new BST();
         System.out.println(tree.search(7));
@@ -274,20 +284,25 @@ public class BST implements EstruturaDeDados{
         tree.insert(8);
         tree.insert(1);
         System.out.println(tree.search(5));
-        System.out.println(tree.search(15));
-        tree.delete(15);
-        tree.delete(5);
-        System.out.println(tree.search(15));
-        System.out.println(tree.search(5));
-        System.out.println(tree.maximum());
+        System.out.println(tree.search(7));
+        System.out.println(tree.search(1));
         System.out.println(tree.minimum());
+        System.out.println(tree.maximum());
+        System.out.println(tree.sucessor(1));
+        System.out.println(tree.sucessor(2));
+        System.out.println(tree.sucessor(4));
+        System.out.println(tree.sucessor(5));
+        System.out.println(tree.sucessor(6));
+        System.out.println(tree.sucessor(8));
+        System.out.println(tree.sucessor(10));
+        System.out.println(tree.sucessor(15));
         System.out.println(tree.sucessor(99));
+        System.out.println(tree.prodessor(10));
+        System.out.println(tree.prodessor(99));
         System.out.println(tree.prodessor(1));
-       
-
-
-       
-
-        
+        tree.delete(10);
+        System.out.println(tree.search(10));
+        tree.delete(99);
+        System.out.println(tree.search(99));
     }
 }
