@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class BST implements EstruturaDeDados{
 
     private Node root;
@@ -37,28 +39,6 @@ public class BST implements EstruturaDeDados{
     
     }
 
-    private void deleteNode(Node n, int key){
-        if (key >= n.getValue()){
-            Node r = n.getRight();
-            if (r.getValue() == key){
-                //verificar se r é folha
-                if (r.getRight() == null && r.getLeft() == null){
-                    //Caso 1
-                    n.setRight(null);
-                } else if (r.getRight() == null){
-                    //Caso 2
-                    n.setRight(r.getLeft());
-                } else if (r.getLeft() == null){
-                    //Caso 2
-                    n.setRight(r.getRight());
-                } else{
-                    // Caso 3
-                }
-                
-            }
-
-        }
-    }
     private boolean remover (int key){
         Node atual = this.root;
         Node paiatual = null;
@@ -227,14 +207,42 @@ public class BST implements EstruturaDeDados{
 
     @Override
     public int sucessor(int chave) {
-        return 0;
+        int[] sucessor = new int[1];
+        sucessor[0] = compareMaximum(root, root.getValue());
+        searchSucessor(root, chave, sucessor);
+        return sucessor[0];
     }
+
+    private void searchSucessor(Node no, int key, int[] sucessor) {
+        if (no != null) {
+            searchSucessor(no.getLeft(), key, sucessor);
+            if (no.getValue() > key && no.getValue() < sucessor[0]) {
+                sucessor[0] = no.getValue();
+            }
+            searchSucessor(no.getRight(), key, sucessor);
+        }
+    }
+    
 
     @Override
     public int prodessor(int chave) {
-        return 0;
+        int [] prodessor = new int [1];
+        prodessor [0] = compareMinimum(root, root.getValue());
+        searchProdessor(root, chave, prodessor);
+        return prodessor[0];
+    
+    }
+    private void searchProdessor(Node no, int key, int[] prodessor) {
+        if (no != null) {
+            searchProdessor(no.getRight(), key, prodessor);
+            if (no.getValue() < key && no.getValue() >prodessor[0]) {
+                prodessor[0] = no.getValue();
+            }
+            searchProdessor(no.getLeft(), key, prodessor);
+        }
     }
 
+   
     public static void main(String[] args) {
         BST tree = new BST();
         System.out.println(tree.search(7));
@@ -248,11 +256,19 @@ public class BST implements EstruturaDeDados{
         tree.insert(8);
         tree.insert(1);
         System.out.println(tree.search(5));
-        System.out.println(tree.search(7));
-        System.out.println(tree.search(1));
-        System.out.println(tree.minimum());
+        System.out.println(tree.search(15));
+        tree.delete(15);
+        tree.delete(5);
+        System.out.println(tree.search(15));
+        System.out.println(tree.search(5));
         System.out.println(tree.maximum());
-        tree.remover(10);
-        System.out.println(tree.search(10));
+        System.out.println(tree.minimum());
+        System.out.println(tree.sucessor(8));
+        System.out.println(tree.prodessor(99));
+
+
+       
+
+        
     }
 }
