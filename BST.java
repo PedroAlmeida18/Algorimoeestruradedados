@@ -1,5 +1,5 @@
 public class BST implements EstruturaDeDados{
-
+// Grupo : Ezequiel Henrique, Izadora Freitas e Pedro Hnerique de Almeida Santos 
     private Node root;
 
     @Override
@@ -291,7 +291,7 @@ public class BST implements EstruturaDeDados{
         System.out.println(tree.sucessor(1));
         System.out.println(tree.sucessor(2));
         System.out.println(tree.sucessor(4));
-        System.out.println(tree.sucessor(5));
+        System.out.println( tree.sucessor(5));
         System.out.println(tree.sucessor(6));
         System.out.println(tree.sucessor(8));
         System.out.println(tree.sucessor(10));
@@ -304,5 +304,8 @@ public class BST implements EstruturaDeDados{
         System.out.println(tree.search(10));
         tree.delete(99);
         System.out.println(tree.search(99));
+        System.out.println("Grupo : Ezequiel Henrique, "+
+                                   "Izadora Freitas" + 
+                               "  e Pedro Henrique de Almeida Santos ");
     }
 }
